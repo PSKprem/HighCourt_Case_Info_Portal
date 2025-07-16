@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>High Court Case Search - IGOD Style</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f2f2;
+    }
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header img {
+      height: 50px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+    .search-section {
+      background: white;
+      padding: 30px;
+      margin: 20px auto;
+      max-width: 700px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .search-section h2 {
+      margin-bottom: 20px;
+      color: #003366;
+    }
+    select, input[type="text"] {
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #003366;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #002244;
+    }
+    .navbar {
+      background-color: #006699;
+      padding: 10px 0;
+    }
+    .navbar ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .navbar li {
+      margin: 0 15px;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .navbar a:hover {
+      border-bottom: 2px solid white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo_court.jpg" alt="Logo" />
+    <span>
+      <strong>
+        <h1>भारत का न्यायालय</h1>
+        <h2>HIGH COURT OF INDIA</h2>
+      </strong>
+    </span>
+  </header>
+
+  <nav class="navbar">
+    <ul>
+      <li><a href="insights.html">Insights</a></li>
+    </ul>
+  </nav>
+
+  <section class="search-section">
+    <h2>Search Case Information</h2>
+    <!-- <form method="POST" action="http://127.0.0.1:5000/search"> -->
+    <form method="POST" action="https://premshankark2004.pythonanywhere.com/search">
+      <select name="search-type">
+        <option value="name">Petitioner Name</option>
+        <option value="case">Case Number</option>
+      </select>
+      <input type="text" name="search-input" placeholder="Enter Petitioner or Case Number" required />
+      <button type="submit">Search</button>
+    </form>
+  </section>
+  <script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent normal form submission
+  
+      const formData = new FormData(e.target);
+      const searchType = formData.get('search-type');
+      const searchInput = formData.get('search-input');
+  
+      fetch('https://premshankark2004.pythonanywhere.com/search', {
+      // fetch('http://127.0.0.1:5000/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+          'search-type': searchType,
+          'search-input': searchInput
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Store result in localStorage
+        localStorage.setItem('searchResults', JSON.stringify(data));
+        // Redirect to results.html
+        window.location.href = 'results.html';
+      })
+      .catch(error => {
+        console.error('Search failed:', error);
+        alert('Error performing search. Please try again.');
+      });
+    });
+  </script>
+  
+</body>
+</html>

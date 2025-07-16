@@ -1,0 +1,126 @@
+<section class="help-us-section" id="help-us">
+    <style>
+      :root {
+        --card-bg: #ffffff;
+        --text-color: #003366;
+        --button-bg: #003366;
+        --button-hover: #002244;
+        --icon-color: #00cc99;
+      }
+  
+      .dark-mode {
+        --card-bg: #1c1c1c;
+        --text-color: #f0f0f0;
+        --button-bg: #005599;
+        --button-hover: #003f6b;
+        --icon-color: #66ffcc;
+      }
+  
+      .help-us-section {
+        background-color: var(--card-bg);
+        padding: 40px 20px;
+        text-align: center;
+        margin: 40px auto;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        font-family: "Poppins", sans-serif;
+        transition: background-color 0.4s ease, color 0.4s ease;
+        max-width: 850px;
+      }
+  
+      .help-us-section h2,
+      .help-us-section p,
+      .help-list li {
+        color: var(--text-color);
+      }
+  
+      .help-us-section h2 {
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+      }
+  
+      .help-us-section p {
+        font-size: 1.1rem;
+        margin-bottom: 25px;
+      }
+  
+      .help-list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 30px;
+        text-align: left;
+        display: inline-block;
+      }
+  
+      .help-list li {
+        margin: 10px 0;
+        font-size: 1rem;
+      }
+  
+      .help-list i {
+        color: var(--icon-color);
+        margin-right: 10px;
+      }
+  
+      .help-btn {
+        background-color: var(--button-bg);
+        color: white;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+  
+      .help-btn:hover {
+        background-color: var(--button-hover);
+        transform: scale(1.05);
+      }
+  
+      .mode-toggle {
+        margin-top: 20px;
+        background: none;
+        border: 2px solid var(--button-bg);
+        color: var(--text-color);
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+  
+      .mode-toggle:hover {
+        background-color: var(--button-bg);
+        color: white;
+      }
+    </style>
+  
+    <h2>🤝 Help Us</h2>
+    <p>We are on a mission to improve transparency and accessibility of legal data for everyone. You can contribute by:</p>
+  
+    <ul class="help-list">
+      <li><i class="fa fa-check-circle"></i> Sharing this website with others</li>
+      <li><i class="fa fa-check-circle"></i> Reporting incorrect or outdated case information</li>
+      <li><i class="fa fa-check-circle"></i> Suggesting new features or improvements</li>
+    </ul>
+  
+    <button class="help-btn" onclick="scrollToContact()">Contact Us to Help</button>
+    <br><br>
+    <button class="mode-toggle" onclick="toggleMode()">Toggle Dark/Bright Mode</button>
+  
+    <script>
+      function scrollToContact() {
+        const contact = document.getElementById('contact');
+        if (contact) {
+          contact.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          alert("Contact section not found.");
+        }
+      }
+  
+      function toggleMode() {
+        document.documentElement.classList.toggle('dark-mode');
+      }
+    </script>
+  </section>
+  

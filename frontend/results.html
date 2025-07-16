@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Search Results</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #003366;
+      color: white;
+    }
+    a {
+      color: #003366;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h2>CASE INFORMATION</h2>
+  <div id="resultsTable"></div>
+
+  <!-- <script>
+    // Replace this JSON array with fetch if loading from a file.
+    fetch('//results.json')
+    .then(response => response.json())
+    .then(results => {
+      console.log(results);
+      if (results.length === 0) {
+        document.getElementById('resultsTable').innerHTML = "<p>No results found.</p>";
+      } else {
+        let table = "<table><tr>";
+        for (let key in results[0]) {
+          table += `<th>${key}</th>`;
+        }
+        table += "</tr>";
+  
+        results.forEach(row => {
+          table += "<tr>";
+          for (let key in row) {
+            if (key === "PDF Link" || key === "HTML Link") {
+              table += `<td><a href="${row[key]}" target="_blank">View ${key.replace(" Link", "")}</a></td>`;
+            } else {
+              table += `<td>${row[key]}</td>`;
+            }
+          }
+          table += "</tr>";
+        });
+  
+        table += "</table>";
+        document.getElementById("resultsTable").innerHTML = table;
+      }
+    });
+  </script> -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const data = localStorage.getItem('searchResults');
+      const results = JSON.parse(data || '[]');
+  
+      const container = document.getElementById("resultsTable");
+  
+      if (results.length === 0) {
+        container.innerHTML = "<p>No results found.</p>";
+        return;
+      }
+  
+      let table = "<table><tr>";
+      for (let key in results[0]) {
+        table += `<th>${key}</th>`;
+      }
+      table += "</tr>";
+  
+      results.forEach(row => {
+        table += "<tr>";
+        for (let key in row) {
+          if ((key === "PDF Link" || key === "HTML Link") && row[key]) {
+            const label = key.replace(" Link", "");
+            table += `<td><a href='${row[key]}' target="_blank">View ${label}</a></td>`;
+          } else {
+            table += `<td>${row[key]}</td>`;
+          }
+        }
+        table += "</tr>";
+      });
+  
+      table += "</table>";
+      container.innerHTML = table;
+    });
+  </script>
+  
+</body>
+</html>

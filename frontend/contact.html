@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact & Team Section</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      transition: background 0.5s, color 0.5s;
+    }
+
+    .dark-mode {
+      background: #121212;
+      color: #f0f0f0;
+    }
+
+    .container {
+      padding: 40px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #003366;
+    }
+
+    .dark-mode h2 {
+      color: #00ffff;
+    }
+
+    .toggle-mode {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .toggle-mode button {
+      padding: 10px 20px;
+      border: none;
+      background: #003366;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 20px;
+    }
+
+    .dark-mode .toggle-mode button {
+      background: #00ffff;
+      color: #000;
+    }
+
+    .team {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 20px;
+      width: 250px;
+      text-align: center;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      background: #e0f7ff;
+    }
+
+    .dark-mode .card {
+      background: #1e1e1e;
+      color: #fff;
+    }
+
+    .dark-mode .card:hover {
+      background: #2e2e2e;
+    }
+
+    .card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #003366;
+    }
+
+    .dark-mode .card img {
+      border-color: #00ffff;
+    }
+
+    .info {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .info a {
+      color: #003366;
+      text-decoration: none;
+      display: block;
+      margin: 5px;
+      font-weight: bold;
+    }
+
+    .dark-mode .info a {
+      color: #00ffff;
+    }
+
+    .form-section {
+      background: #f9f9f9;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .dark-mode .form-section {
+      background: #1a1a1a;
+    }
+
+    form {
+      display: grid;
+      gap: 15px;
+    }
+
+    input, textarea {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      transition: border 0.3s;
+    }
+
+    input:focus, textarea:focus {
+      border: 1px solid #003366;
+    }
+
+    .dark-mode input, .dark-mode textarea {
+      background: #2b2b2b;
+      color: #fff;
+      border: 1px solid #444;
+    }
+
+    button[type="submit"] {
+      background: #003366;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .dark-mode button[type="submit"] {
+      background: #00ffff;
+      color: #000;
+    }
+
+    button[type="submit"]:hover {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="toggle-mode">
+      <button onclick="toggleMode()">🌗 Toggle Theme</button>
+    </div>
+
+    <h2>🌟 Meet Our Team & Mentor</h2>
+    <div class="team">
+      <div class="card">
+        <img src="WhatsApp Image 2024-11-05 at 22.05.50_be39d463.jpg" alt="Member 1">
+        <h3>Rani Kumari</h3>
+        <p>Frontend Developer</p>
+      </div>
+      <div class="card">
+        <img src="Profile_pragati.jpeg" alt="Member 2">
+        <h3>Pragati chauhan</h3>
+        <p>Backend Developer</p>
+      </div>
+      <div class="card">
+        <img src="prem.jpeg" alt="Member 3">
+        <h3>Prem Shankar Kushwaha</h3>
+        <p>Scraping & Deployment</p>
+      </div>
+      <div class="card">
+        <img src="achal.jpg" alt="Mentor">
+        <h3>Achal Agrawal</h3>
+        <p>Project Mentor</p>
+      </div>
+    </div>
+
+    <div class="info">
+      <h3>📧 Contact Us</h3>
+      <a href="mailto:project@example.com">project@example.com</a>
+      <a href="app.html" target="_blank">Visit Our Website</a>
+      <p>Hosted by: Sitare University</p>
+    </div>
+
+    <div class="form-section">
+      <h2>📝 Tell Us About Yourself</h2>
+      <form onsubmit="handleForm(event)">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <input type="text" id="address" placeholder="Your Address">
+        <textarea id="opinion" rows="4" placeholder="Your Opinion or Message"></textarea>
+        <button type="submit">Submit</button>
+      </form>
+      <div id="response" style="margin-top: 15px; font-weight: bold;"></div>
+    </div>
+  </div>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    function handleForm(event) {
+      event.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const address = document.getElementById("address").value;
+      const opinion = document.getElementById("opinion").value;
+
+      document.getElementById("response").innerText =
+        `Thanks, ${name}! We received your message.`;
+
+      // Reset form
+      event.target.reset();
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - High Court Case Information</title>
+    <style>
+        /* Default light mode styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #032368;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            background-color: #072462;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        button#mode-toggle {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .about-section {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        footer {
+            background-color: #072462;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            /* position: fixed; */
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #2c2c2c;
+            color: #f1f1f1;
+        }
+
+        header.dark-mode {
+            background-color: #111;
+        }
+
+        footer.dark-mode {
+            background-color: #111;
+        }
+
+        button#mode-toggle.dark-mode {
+            color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button id="mode-toggle" onclick="toggleMode()">🌙</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="about-section">
+            <h1>About This Website</h1>
+            <p>Welcome to the High Court Case Information portal. This platform has been designed to provide seamless access to case-related data, offering easy search functionality for case types, names, and case numbers.</p>
+            <p>The website features a comprehensive search tool that allows users to search for cases based on various criteria, such as case type, name, or case number. Additionally, each case entry is accompanied by detailed information and downloadable PDFs for reference.</p>
+
+            <h2>Technologies Used</h2>
+            <ul>
+                <li><strong>Backend:</strong> Flask, FastAPI</li>
+                <li><strong>Frontend:</strong> HTML, CSS, JavaScript, Chart.js</li>
+                <li><strong>Web Scraping:</strong> BeautifulSoup, Selenium</li>
+            </ul>
+
+            <h2>Purpose of the Website</h2>
+            <p>This platform aims to provide a user-friendly interface for legal professionals and the general public to search and access important case details with ease. It is designed to ensure transparency and efficiency in accessing court records and case-related information.</p>
+
+            <h2>Useful Features</h2>
+            <ul>
+                <li>Search for cases by case type, name, or case number</li>
+                <li>View detailed case information with downloadable PDF files</li>
+                <li>Interactive charts displaying case statistics over time using Chart.js</li>
+                <li>Data visualization through bar and line charts for the state's performance</li>
+            </ul>
+
+            <h2>Graphs and Data Visualizations</h2>
+            <p>The website includes interactive graphs built with Chart.js, which visualize important data such as case statistics. Users can filter data by state and year, and view metrics like registered, solved, and pending cases over time. These charts provide a clear visual representation of case trends, making it easier to understand and analyze performance data.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 High Court Case Information. All Rights Reserved.</p>
+        
+        <p>Website: <a href="https://www.example.com">www.example.com</a></p>
+    </footer>
+
+    <script>
+        // Function to toggle dark and light mode
+        function toggleMode() {
+            const body = document.body;
+            const header = document.querySelector('header');
+            const footer = document.querySelector('footer');
+            const button = document.getElementById('mode-toggle');
+
+            // Toggle dark mode class
+            body.classList.toggle('dark-mode');
+            header.classList.toggle('dark-mode');
+            footer.classList.toggle('dark-mode');
+            button.classList.toggle('dark-mode');
+
+            // Change button icon based on the current mode
+            if (body.classList.contains('dark-mode')) {
+                button.textContent = '🌞'; // Sun icon for light mode
+            } else {
+                button.textContent = '🌙'; // Moon icon for dark mode
+            }
+        }
+    </script>
+</body>
+</html>

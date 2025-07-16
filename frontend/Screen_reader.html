@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Accessibility & Screen Reader Support</title>
+  <style>
+    :root {
+      --bg-light: #f4f4f4;
+      --text-light: #222;
+      --card-light: #fff;
+      --shadow-light: rgba(0, 0, 0, 0.1);
+
+      --bg-dark: #121212;
+      --text-dark: #f5f5f5;
+      --card-dark: #1e1e1e;
+      --shadow-dark: rgba(255, 255, 255, 0.05);
+
+      --primary: #004080;
+      --hover: #0073e6;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: background-color 0.4s, color 0.4s;
+      padding: 20px;
+    }
+
+    .accessibility-section {
+      background-color: var(--card-light);
+      border-radius: 12px;
+      padding: 25px;
+      max-width: 900px;
+      margin: auto;
+      box-shadow: 0 4px 10px var(--shadow-light);
+      transition: background-color 0.4s, box-shadow 0.4s;
+    }
+
+    h2 {
+      color: var(--primary);
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    p, li {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    ul {
+      margin-top: -10px;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: var(--hover);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #0050c1;
+      text-decoration: underline;
+    }
+
+    /* Dark mode */
+    body.dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    body.dark-mode .accessibility-section {
+      background-color: var(--card-dark);
+      box-shadow: 0 4px 10px var(--shadow-dark);
+    }
+
+    body.dark-mode h2 {
+      color: #00ffff;
+    }
+
+    body.dark-mode a {
+      color: #66ccff;
+    }
+
+    body.dark-mode a:hover {
+      color: #00aaff;
+    }
+
+    /* Toggle Button */
+    .toggle-mode {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .toggle-mode button {
+      padding: 10px 20px;
+      font-size: 14px;
+      background-color: #004080;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .toggle-mode button:hover {
+      background-color: #0055b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toggle-mode">
+    <button id="modeBtn" onclick="toggleMode()">🌗 Switch to Dark Mode</button>
+  </div>
+
+  <section class="accessibility-section" role="region" aria-labelledby="accessibility-heading" tabindex="0">
+    <h2 id="accessibility-heading"> Accessibility & Screen Reader Support</h2>
+
+    <p>
+      This website is designed to be accessible to everyone, including those using screen readers and keyboard navigation.
+      All visual charts and graphs are accompanied by detailed text descriptions.
+    </p>
+
+    <p>
+      Charts are described through:
+      <ul>
+        <li>Clear titles and chart labels</li>
+        <li>Explanation of what each chart shows</li>
+        <li>Insights derived from the data</li>
+      </ul>
+    </p>
+
+    <p>
+      All interactive elements like dropdowns and buttons follow ARIA standards and are keyboard-friendly.
+    </p>
+
+    <p>
+      For any accessibility concerns, please contact us at
+      <a href="mailto:highcourt-support@example.com">highcourt-support@example.com</a>.
+    </p>
+  </section>
+
+  <script>
+    const btn = document.getElementById("modeBtn");
+
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+      if (document.body.classList.contains("dark-mode")) {
+        btn.textContent = "🌞 Switch to Light Mode";
+      } else {
+        btn.textContent = "🌗 Switch to Dark Mode";
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Info & Footer</title>
+  <style>
+    :root {
+      --light-bg: #ffffff;
+      --light-text: #000000;
+      --light-hover: #f9f9f9;
+      --dark-bg: #121212;
+      --dark-text: #f1f1f1;
+      --dark-hover: #1f1f1f;
+      --primary: hsl(44, 84%, 50%);
+      --border-radius: 15px;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--light-text);
+      transition: all 0.3s ease;
+      font-size: 1.15rem;
+    }
+
+    body.dark-mode {
+      background-color: var(--dark-bg);
+      color: var(--dark-text);
+    }
+
+    .info-section {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .info-card {
+      background-color: var(--light-hover);
+      border: 2px solid var(--primary);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-card:hover {
+      transform: scale(1.01);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+    }
+
+    body.dark-mode .info-card {
+      background-color: var(--dark-hover);
+      border: 2px solid #00b7ff;
+    }
+
+    .info-section h2 {
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .info-section p, .info-section ul {
+      line-height: 1.7;
+    }
+
+    .info-section ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .info-section li::before {
+      content: "🔹 ";
+    }
+
+    .info-section a {
+      color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .info-section a:hover {
+      color: #00b7ff;
+    }
+
+    .footer {
+      background-color: var(--light-hover);
+      color: var(--light-text);
+      padding: 1.2rem 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+      margin-top: 3rem;
+    }
+
+    body.dark-mode .footer {
+      background-color: var(--dark-hover);
+      color: var(--dark-text);
+    }
+
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: #00aaff;
+    }
+
+    .mode-toggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: var(--primary);
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      font-size: 1rem;
+      z-index: 1000;
+    }
+
+    .mode-toggle:hover {
+      background: #0055aa;
+    }
+  </style>
+</head>
+<body>
+
+<button class="mode-toggle" onclick="toggleMode()">Toggle Mode</button>
+
+<section class="info-section">
+  <h2>Project Information</h2>
+  <div class="info-card">
+    
+    <p>This website is a High Court Case Portal developed for easier access to case details. Users can search for cases, download PDFs, and view judgments.</p>
+    <p><strong>Purpose:</strong> Help government officials, legal professionals, and citizens get case data easily.</p>
+    <ul>
+      <li>Built with: HTML, CSS, JavaScript, Flask, FastAPI</li>
+      <li>Used tools: BeautifulSoup for web scraping, Chart.js for dynamic visualizations</li>
+      <li>Offers PDF + Text format for accessibility</li>
+      <li>Search by voice for differently-abled users</li>
+      <li>Dynamic Graphs State-wise</li>
+    </ul>
+    <p><strong>Want to learn more?</strong> 
+      <a href="https://www.chartjs.org/" target="_blank">Chart.js Docs</a>, 
+      <a href="https://beautiful-soup-4.readthedocs.io/en/latest/" target="_blank">BeautifulSoup Docs</a>
+    </p>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>📅 Last Updated: May 5, 2025</p>
+  <p>📧 Email: <a href="mailto:team@highcourtinfo.org">team@highcourtinfo.org</a> | 🌐 Website: <a href="https://www.highcourtinfo.org" target="_blank">www.highcourtinfo.org</a></p>
+  <p>🏛️ Hosted by: Sitare University | 🔗 Join our <a href="#">Community</a></p>
+</footer>
+
+<script>
+  function toggleMode() {
+    document.body.classList.toggle("dark-mode");
+  }
+</script>
+
+</body>
+</html>

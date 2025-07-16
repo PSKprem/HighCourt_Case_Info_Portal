@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Website Features</title>
+  <style>
+    :root {
+      --bg-color: #f8f9fa;
+      --text-color: #333;
+      --card-bg: #ffffff;
+      --primary-color: #007bff;
+      --secondary-bg: #e9f5ff;
+      --border-color: #007bff;
+    }
+
+    body.dark-mode {
+      --bg-color: #1f1f1f;
+      --text-color: #f1f1f1;
+      --card-bg: #2b2b2b;
+      --primary-color: #66b2ff;
+      --secondary-bg: #4b4343;
+      --border-color: #66b2ff;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: var(--bg-color);
+      color: var(--text-color);
+      transition: all 0.3s ease;
+    }
+
+    .toggle-btn {
+      text-align: right;
+      padding: 15px 30px;
+    }
+
+    .toggle-btn button {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 8px 18px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .features-section, .judges-section, .updates-section {
+      padding: 50px 20px;
+      text-align: center;
+      background: var(--card-bg);
+      margin: 40px auto;
+      max-width: 1200px;
+      border-radius: 16px;
+    
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+
+    .features-container, .judges-container, .updates-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .feature-card, .judge-card, .update-item {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      flex: 1 1 250px;
+      max-width: 300px;
+      text-align: center;
+     border: 2px solid rgb(219, 219, 222);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .feature-card:hover, .judge-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .judge-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      background: #ccc;
+    }
+   
+
+    .icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+      color: var(--primary-color);
+    }
+
+    .update-item {
+      background: var(--secondary-bg);
+      border-left: 5px solid var(--border-color);
+      text-align: left;
+    }
+
+    .mic-search {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .mic-search input {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+      border: 2px solid var(--primary-color);
+      border-radius: 6px 0 0 6px;
+      background: white;
+    }
+
+    body.dark-mode .mic-search input {
+      background: #444;
+      color: #fff;
+    }
+
+    .mic-search button {
+      padding: 10px 15px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 0 6px 6px 0;
+      cursor: pointer;
+    }
+
+    .mic-search button:hover {
+      background-color: #0056b3;
+    }
+    
+    body.dark-mode h3 {
+  color: orange;
+}
+
+body.dark-mode .feature-card {
+  border: 1px solid #0ba7d7; /* or use a color like aqua, white, etc. */
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- 🌗 Dark Mode Toggle -->
+  <div class="toggle-btn">
+    <button onclick="toggleMode()">🌞 Toggle Dark/Bright Mode</button>
+  </div>
+
+  <!-- 🌟 Features Section -->
+  <section class="features-section">
+    <h2>Website Features</h2>
+    <div class="features-container">
+      <div class="feature-card">
+        <div class="icon">🔍</div>
+        <h3>Advanced Case Search</h3>
+        <p>Search by name, number, petitioner, year or case type with smart filtering.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">📈</div>
+        <h3>Graphical Analysis</h3>
+        <p>Visualize case statistics state-wise using bar, pie and line charts.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">📁</div>
+        <h3>Download Judgments</h3>
+        <p>View or download case judgments in PDF format directly.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🧑‍⚖️</div>
+        <h3>Petitioner Info</h3>
+        <p>View petitioner's case history, filed and solved cases.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🎤</div>
+        <h3>Voice Search</h3>
+        <p>Search cases using voice input – easy for disabled users.</p>
+      </div>
+    </div>
+
+    <!-- Voice Input Field -->
+    <div class="mic-search">
+      <input type="text" placeholder="Speak or type your query..." />
+      <button onclick="alert('Voice search coming soon!')">🎤</button>
+    </div>
+  </section>
+
+  <!-- 👨‍⚖️ Judges Section -->
+  <section class="judges-section">
+    <h2>Top 5 Honorable Judges</h2>
+    <div class="judges-container">
+      <div class="judge-card">
+        <img src="judge1.jpg" alt="Judge 1">
+        <h3>Justice A. Kumar</h3>
+        <p>Delhi High Court</p>
+      </div>
+      <div class="judge-card">
+        <img src="judge2.jpg" alt="Judge 2">
+        <h3>Justice B. Singh</h3>
+        <p>Bombay High Court</p>
+      </div>
+      <div class="judge-card">
+        <img src="judge3.jpg" alt="Judge 3">
+        <h3>Justice C. Sharma</h3>
+        <p>Madras High Court</p>
+      </div>
+      <div class="judge-card">
+        <img src="judge4.jpg" alt="Judge 4">
+        <h3>Justice D. Reddy</h3>
+        <p>Telangana High Court</p>
+      </div>
+      <div class="judge-card">
+        <img src="judge5.jpg" alt="Judge 5">
+        <h3>Justice E. Verma</h3>
+        <p>Kolkata High Court</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🚀 Update Section -->
+  <section class="updates-section">
+    <h2>Upcoming Features & Plans</h2>
+    <div class="updates-list">
+      <div class="update-item">
+        <h4>📌 Add All Indian High Courts</h4>
+        <p>Currently we have data for 2 states, but soon we’ll include all High Courts.</p>
+      </div>
+      <div class="update-item">
+        <h4>📌 State-Wise Graph Comparison</h4>
+        <p>Interactive visual graphs based on case types, solved rate, and backlogs per state.</p>
+      </div>
+      <div class="update-item">
+        <h4>📌 Voice Search for Disabled Users</h4>
+        <p>Search by speaking — we are adding full speech recognition for accessibility.</p>
+      </div>
+      <div class="update-item">
+        <h4>📌 Enhanced Case Functionality</h4>
+        <p>Improved user interface for viewing, tracking, and comparing case progress.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+  </script>
+
+</body>
+</html>

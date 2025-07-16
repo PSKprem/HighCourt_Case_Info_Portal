@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terms and Conditions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: var(--bg);
+      color: var(--text);
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 15px;
+      transition: background 0.2s, padding-left 0.2s;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    li:hover {
+      background-color: var(--hover);
+      padding-left: 20px;
+    }
+
+    .toggle-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #003366;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    .toggle-btn:hover {
+      background-color: #001f3f;
+    }
+
+    :root {
+      --bg: #ffffff;
+      --text: #333333;
+      --hover: #f0f0f0;
+    }
+
+    body.dark {
+      --bg: #1f1f1f;
+      --text: #f5f5f5;
+      --hover: #333333;
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-btn" onclick="toggleMode()">Dark Mode</button>
+
+  <div class="container">
+    <h1>Terms and Conditions</h1>
+    <ul>
+      <li><strong>Acceptance of Terms:</strong> By using this website, you agree to abide by all rules and conditions mentioned here.</li>
+      <li><strong>Use of Website:</strong> This website is for legal case information and must be used for academic or authorized purposes only.</li>
+      <li><strong>User Responsibility:</strong> Users must not submit false or misleading information during search or form inputs.</li>
+      <li><strong>Data Accuracy:</strong> We strive for accuracy, but we do not guarantee the completeness of all case data.</li>
+      <li><strong>Privacy Statement:</strong> Any personal information submitted is kept confidential as per institutional policy.</li>
+      <li><strong>Limitation of Liability:</strong> The university is not liable for any loss due to inaccuracies in provided content.</li>
+      <li><strong>Intellectual Property:</strong> All content is the intellectual property of the university unless stated otherwise.</li>
+      <li><strong>Modifications:</strong> These terms may be updated anytime. Continued use implies your agreement to the updated terms.</li>
+    </ul>
+  </div>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle('dark');
+      const btn = document.querySelector('.toggle-btn');
+      btn.textContent = document.body.classList.contains('dark') ? 'Bright Mode' : 'Dark Mode';
+    }
+  </script>
+</body>
+</html>

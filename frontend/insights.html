@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Insights - High Court Cases</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Fancy Background */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #e6f0ff, #ffffff);
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      color: #003366;
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 0 #ccc;
+    }
+
+    /* Dropdown Card */
+    .dropdown-card {
+      background-color: #ffffff;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    label {
+      font-weight: bold;
+      font-size: 18px;
+      display: block;
+      margin-bottom: 10px;
+      color: #003366;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #cccccc;
+      outline: none;
+      transition: border 0.3s ease;
+    }
+
+    select:focus {
+      border-color: #003366;
+    }
+
+    /* Chart Container Card */
+    #chart-container {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 95%;
+      max-width: 1000px;
+    }
+
+    canvas {
+      margin-top: 20px;
+    }
+
+    /* Optional: Responsive */
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 24px;
+      }
+      .dropdown-card {
+        padding: 15px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>📊 Insights Dashboard</h2>
+
+  <div class="dropdown-card">
+    <label for="visualization-select"><strong>Choose the visualization:</strong></label>
+    <select id="visualization-select" onchange="updateChart()">
+      <option value="">-- Select --</option>
+      <option value="casesPerYear">Cases Per Year</option>
+      <option value="casesPerJudge">Cases Per Judge</option>
+      <option value="casesPerPetitioner">Cases Per Respondent</option>
+      <option value="casesPerMonth">Most Active Months</option>
+    </select>
+  </div>
+
+  <div id="chart-container">
+    <canvas id="chartCanvas"></canvas>
+  </div>
+
+  <script>
+    let chart;
+    let chartData = [];
+
+    fetch('judgment_data.csv')
+    // fetch('https://www.pythonanywhere.com/user/premShankarK2004/files/home/premShankarK2004/mysite/judgment_data.csv')
+      .then(response => response.text())
+      .then(data => {
+        const rows = data.split('\n').slice(1);
+        chartData = rows.map(row => {
+          const [date, judge, caseNo, petitioner, respondent, pdf, html] = row.split(/,(?=(?:(?:[^"]"){2})[^"]*$)/);
+          return {
+            "Judgment Date": date?.trim(),
+            "Judge": judge?.trim(),
+            "Case Number": caseNo?.trim(),
+            "Petitioner": petitioner?.trim(),
+            "Respondent": respondent?.trim()
+          };
+        });
+      });
+
+    function updateChart() {
+      const selected = document.getElementById('visualization-select').value;
+      if (selected === 'casesPerYear') showCasesPerYear(chartData);
+      else if (selected === 'casesPerJudge') showCasesPerJudge(chartData);
+      else if (selected === 'casesPerPetitioner') showCasesPerPetitioner(chartData);
+      else if (selected === 'casesPerMonth') showCasesPerMonth(chartData);
+    }
+    function drawChart(labels, data, title, horizontal = false, darkLabels = false) {
+      if (chart) chart.destroy();
+
+      // Generate unique random colors
+      function generateUniqueColors(count) {
+        const colors = new Set();
+        while (colors.size < count) {
+          const color = `hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`;
+          colors.add(color);
+        }
+        return Array.from(colors);
+      }
+
+      const barColors = generateUniqueColors(data.length);
+
+      const ctx = document.getElementById('chartCanvas').getContext('2d');
+      chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: title,
+            data: data,
+            backgroundColor: barColors
+          }]
+        },
+        options: {
+          indexAxis: horizontal ? 'y' : 'x',
+          plugins: {
+            legend: { display: false },
+            title: {
+              display: true,
+              text: title,
+              font: { size: 18 }
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: horizontal ? '#000' : '#003366' }
+            },
+            y: {
+              ticks: { color: darkLabels ? '#000' : '#003366' }
+            }
+          }
+        }
+      });
+    }
+
+
+    function showCasesPerYear(data) {
+      const yearCount = {};
+      data.forEach(row => {
+        const year = row["Judgment Date"].split(',')[0].split('-')[2];
+        if (year) yearCount[year] = (yearCount[year] || 0) + 1;
+      });
+      const sorted = Object.entries(yearCount).sort((a, b) => b[0] - a[0]);
+      drawChart(sorted.map(e => e[0]), sorted.map(e => e[1]), 'Cases Per Year');
+    }
+
+    function showCasesPerJudge(data) {
+      const judgeCount = {};
+      data.forEach(row => {
+        const judge = row["Judgment Date"].split(',')[1];
+        if (judge) judgeCount[judge] = (judgeCount[judge] || 0) + 1;
+      });
+      const sorted = Object.entries(judgeCount).sort((a, b) => b[1] - a[1]);
+      drawChart(sorted.map(e => e[0]), sorted.map(e => e[1]), 'Cases Per Judge', true, true);
+    }
+
+    function showCasesPerPetitioner(data) {
+      const petitionerCount = {};
+      data.forEach(row => {
+        let petitioner = row["Judgment Date"].split(',')[4];
+        if (petitioner) {
+          petitioner = petitioner.split(' ');
+          for(let i=0; i<petitioner.length; i++) {
+            petitioner[i] = petitioner[i].toLowerCase().charAt(0).toUpperCase() + petitioner[i].toLowerCase().slice(1, petitioner[i].length);
+          }
+          petitioner = petitioner.join(" ");
+          if (petitioner) petitionerCount[petitioner] = (petitionerCount[petitioner] || 0) + 1;
+        }
+      });
+      const sorted = Object.entries(petitionerCount).sort((a, b) => b[1] - a[1]).slice(0, 15);
+      drawChart(sorted.map(e => e[0]), sorted.map(e => e[1]), 'Top 15 Respondent', true, true);
+    }
+
+    function showCasesPerMonth(data) {
+      const monthMap = {
+        '01': 'January', 
+        '02': 'February', 
+        '03': 'March',
+        '04': 'April',
+        '05': 'May', 
+        '06': 'June',
+        '07': 'July', 
+        '08': 'August', 
+        '09': 'September',
+        '10': 'October', 
+        '11': 'November', 
+        '12': 'December'
+      };
+      const monthCount = {};
+      data.forEach(row => {
+        const month = row["Judgment Date"].split(',')[0].split('-')[1];
+        const monthName = monthMap[month];
+        if (monthName) monthCount[monthName] = (monthCount[monthName] || 0) + 1;
+      });
+      const sorted = Object.entries(monthCount);
+      drawChart(sorted.map(e => e[0]), sorted.map(e => e[1]), 'Most Active Months for Judgments');
+    }
+  </script>
+</body>
+</html>

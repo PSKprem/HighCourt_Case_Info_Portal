@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FAQs - High Court Case Search</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+      transition: background-color 0.4s, color 0.4s;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .faq-item {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      transition: background 0.3s ease;
+    }
+
+    .faq-question {
+      background-color: #e0e0e0;
+      padding: 18px 24px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background-color: #d0d0d0;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 18px 24px;
+      background-color: #fafafa;
+      line-height: 1.6;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .faq-item.active .faq-question {
+      background-color: #cfd8dc;
+    }
+
+    .toggle-mode {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #003366;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      z-index: 1000;
+      transition: background 0.3s ease;
+    }
+
+    .toggle-mode:hover {
+      background: #002244;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    body.dark-mode .faq-question {
+      background-color: #2e2e2e;
+      color: #e0e0e0;
+    }
+
+    body.dark-mode .faq-question:hover {
+      background-color: #3a3a3a;
+    }
+
+    body.dark-mode .faq-answer {
+      background-color: #1e1e1e;
+    }
+
+    body.dark-mode .faq-item.active .faq-question {
+      background-color: #444;
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-mode" onclick="toggleMode()">🌗 Toggle Mode</button>
+  <div class="container">
+    <h1>Frequently Asked Questions</h1>
+
+    <div class="faq-item">
+      <div class="faq-question">How can I search for a case? <span>+</span></div>
+      <div class="faq-answer">You can search by either case number or petitioner name using the search bar on the home page.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Can I use partial names or case numbers? <span>+</span></div>
+      <div class="faq-answer">Yes, the system supports partial matches and will list close results.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">What kind of cases are listed here? <span>+</span></div>
+      <div class="faq-answer">Only public cases from the High Court are shown. Confidential cases are excluded.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">How often is the data updated? <span>+</span></div>
+      <div class="faq-answer">The data is updated every month or based on official court records release.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Can I download case details? <span>+</span></div>
+      <div class="faq-answer">Yes, available cases offer downloadable PDFs from the result section.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Is the website screen reader friendly? <span>+</span></div>
+      <div class="faq-answer">Yes, the website follows basic accessibility and semantic guidelines for assistive tech.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">Who can I contact for wrong information? <span>+</span></div>
+      <div class="faq-answer">Reach out to the development/support team via the contact section or footer email.</div>
+    </div>
+  </div>
+
+  <script>
+    // Toggle dark/bright mode
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    // Accordion behavior
+    document.querySelectorAll(".faq-question").forEach(q => {
+      q.addEventListener("click", () => {
+        const item = q.parentElement;
+        item.classList.toggle("active");
+
+        // Optional: change + to - on open
+        const sign = q.querySelector("span");
+        if (item.classList.contains("active")) {
+          sign.textContent = "−";
+        } else {
+          sign.textContent = "+";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
